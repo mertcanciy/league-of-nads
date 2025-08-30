@@ -1,26 +1,230 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap');
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Monad Purple Color Palette */
+  --monad-primary: #6B46C1;
+  --monad-secondary: #8B5CF6;
+  --monad-accent: #A855F7;
+  --monad-light: #C084FC;
+  --monad-darker: #4C1D95;
+  --monad-deep: #2E1065;
+  --monad-gradient-1: #6B46C1;
+  --monad-gradient-2: #8B5CF6;
+  --monad-gradient-3: #A855F7;
+  
+  /* Anime-style colors */
+  --anime-bg-primary: #1E0F3A;
+  --anime-bg-secondary: #2D1B4E;
+  --anime-bg-tertiary: #3D2963;
+  --anime-surface: #4C3575;
+  --anime-surface-light: #5D4087;
+  
+  /* Text colors */
+  --text-primary: #F8FAFC;
+  --text-secondary: #E2E8F0;
+  --text-muted: #CBD5E1;
+  --text-accent: #DDD6FE;
+  
+  /* Glow effects */
+  --glow-primary: rgba(139, 92, 246, 0.5);
+  --glow-secondary: rgba(168, 85, 247, 0.3);
+  --glow-accent: rgba(192, 132, 252, 0.4);
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-background: var(--anime-bg-primary);
+  --color-foreground: var(--text-primary);
+  --font-sans: 'Inter', var(--font-geist-sans), sans-serif;
+  --font-mono: 'JetBrains Mono', var(--font-geist-mono), monospace;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+* {
+  box-sizing: border-box;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: linear-gradient(135deg, var(--anime-bg-primary) 0%, var(--anime-bg-secondary) 50%, var(--anime-bg-tertiary) 100%);
+  color: var(--text-primary);
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  min-height: 100vh;
+  overflow-x: hidden;
+  position: relative;
+}
+
+/* Anime-style animated background */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: 
+    linear-gradient(90deg, transparent 0%, rgba(139, 92, 246, 0.1) 50%, transparent 100%),
+    linear-gradient(0deg, transparent 0%, rgba(168, 85, 247, 0.05) 50%, transparent 100%);
+  background-size: 200px 200px, 150px 150px;
+  animation: float-bg 20s ease-in-out infinite;
+  pointer-events: none;
+  z-index: -1;
+}
+
+@keyframes float-bg {
+  0%, 100% { transform: translate(0, 0) rotate(0deg); }
+  33% { transform: translate(30px, -30px) rotate(1deg); }
+  66% { transform: translate(-20px, 20px) rotate(-1deg); }
+}
+
+/* Anime-style glow effects */
+.anime-glow {
+  box-shadow: 
+    0 0 20px var(--glow-primary),
+    0 0 40px var(--glow-secondary),
+    inset 0 0 20px rgba(139, 92, 246, 0.1);
+}
+
+.anime-glow-accent {
+  box-shadow: 
+    0 0 15px var(--glow-accent),
+    0 0 30px rgba(192, 132, 252, 0.2);
+}
+
+/* Anime-style buttons */
+.anime-button {
+  background: linear-gradient(135deg, var(--monad-primary), var(--monad-secondary));
+  border: 2px solid var(--monad-accent);
+  color: var(--text-primary);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.anime-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.5s;
+}
+
+.anime-button:hover::before {
+  left: 100%;
+}
+
+.anime-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 
+    0 10px 25px rgba(139, 92, 246, 0.4),
+    0 0 20px var(--glow-primary);
+}
+
+.anime-button:active {
+  transform: translateY(0);
+}
+
+/* Anime-style cards */
+.anime-card {
+  background: linear-gradient(145deg, 
+    rgba(61, 41, 99, 0.8), 
+    rgba(76, 53, 117, 0.6));
+  border: 1px solid rgba(139, 92, 246, 0.3);
+  backdrop-filter: blur(10px);
+  border-radius: 16px;
+  box-shadow: 
+    0 8px 32px rgba(30, 15, 58, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+.anime-card:hover {
+  border-color: rgba(168, 85, 247, 0.5);
+  box-shadow: 
+    0 12px 40px rgba(30, 15, 58, 0.4),
+    0 0 20px var(--glow-secondary),
+    inset 0 1px 0 rgba(255, 255, 255, 0.15);
+}
+
+/* Anime-style inputs */
+.anime-input {
+  background: rgba(61, 41, 99, 0.5);
+  border: 2px solid rgba(139, 92, 246, 0.3);
+  color: var(--text-primary);
+  border-radius: 12px;
+  padding: 12px 16px;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(5px);
+}
+
+.anime-input:focus {
+  border-color: var(--monad-accent);
+  box-shadow: 0 0 0 3px var(--glow-secondary);
+  outline: none;
+}
+
+.anime-input::placeholder {
+  color: var(--text-muted);
+}
+
+/* Anime-style text effects */
+.anime-title {
+  background: linear-gradient(135deg, var(--monad-light), var(--monad-accent), var(--monad-secondary));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-weight: 800;
+  text-shadow: 0 0 30px var(--glow-primary);
+}
+
+.anime-subtitle {
+  color: var(--text-accent);
+  text-shadow: 0 2px 10px rgba(139, 92, 246, 0.3);
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--anime-bg-secondary);
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(135deg, var(--monad-primary), var(--monad-secondary));
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(135deg, var(--monad-secondary), var(--monad-accent));
+}
+
+/* Selection styling */
+::selection {
+  background: var(--monad-accent);
+  color: var(--text-primary);
+}
+
+/* Anime loading animation */
+@keyframes anime-pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.7; transform: scale(1.05); }
+}
+
+.anime-loading {
+  animation: anime-pulse 2s ease-in-out infinite;
+}
+
+/* Floating elements */
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+.anime-float {
+  animation: float 3s ease-in-out infinite;
 }
