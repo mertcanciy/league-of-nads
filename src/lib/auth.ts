@@ -160,9 +160,8 @@ export function useAuth() {
   const loginWithMonadGamesID = async () => {
     try {
       console.log('Attempting to login with Monad Games ID...');
-      await loginWithCrossAppAccount({
-        providerAppId: 'cmd8euall0037le0my79qpz42' // Monad Games ID Cross App ID
-      });
+      // Using regular login for now
+      await login();
     } catch (error) {
       console.error('Monad Games ID login failed:', error);
       // Fallback to regular login
