@@ -132,8 +132,9 @@ export function calculateStrategyMultiplier(choices: StrategyChoices): number {
   // Calculate multipliers for all 7 strategic categories
   Object.entries(choices).forEach(([category, value]) => {
     const categoryKey = category as keyof StrategyChoices;
-    if (STRATEGY_MULTIPLIERS[categoryKey] && STRATEGY_MULTIPLIERS[categoryKey][value]) {
-      totalMultiplier *= STRATEGY_MULTIPLIERS[categoryKey][value];
+    const categoryMultipliers = STRATEGY_MULTIPLIERS[categoryKey] as Record<string, number>;
+    if (categoryMultipliers && categoryMultipliers[value]) {
+      totalMultiplier *= categoryMultipliers[value];
     }
   });
   
