@@ -214,8 +214,9 @@ export function getStrategyMultipliers(choices: StrategyChoices): StrategyMultip
   
   Object.entries(choices).forEach(([category, value]) => {
     const categoryKey = category as keyof StrategyChoices;
-    if (STRATEGY_MULTIPLIERS[categoryKey] && STRATEGY_MULTIPLIERS[categoryKey][value]) {
-      multipliers[categoryKey] = STRATEGY_MULTIPLIERS[categoryKey][value];
+    const categoryMultipliers = STRATEGY_MULTIPLIERS[categoryKey] as Record<string, number>;
+    if (categoryMultipliers && categoryMultipliers[value]) {
+      (multipliers as unknown as Record<string, number>)[categoryKey] = categoryMultipliers[value];
     }
   });
   

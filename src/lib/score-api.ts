@@ -1,4 +1,4 @@
-import { GAME_CONFIG } from './game-config';
+// API functions for score management
 
 // API endpoints
 const API_BASE = '/api';
