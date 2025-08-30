@@ -18,14 +18,14 @@ const cspDev = [
 
 const cspProd = [
   "default-src 'self'",
-  "script-src 'self' https:",
-  "script-src-elem 'self' https:",
+  "script-src 'self' 'unsafe-inline' 'unsafe-eval' https: blob: data:",
+  "script-src-elem 'self' 'unsafe-inline' 'unsafe-eval' https: blob: data:",
   "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
   "style-src-elem 'self' 'unsafe-inline' https://fonts.googleapis.com",
   "img-src 'self' data: blob: https:",
-  "connect-src 'self' https: wss:",
+  "connect-src 'self' https: wss: ws: https://*.privy.io https://*.vercel.app https://*.monad.xyz https://testnet.monadexplorer.com",
   "font-src 'self' data: https://fonts.gstatic.com",
-  "frame-src https:",
+  "frame-src 'self' https: https://*.privy.io data:",
   "object-src 'none'",
   "base-uri 'self'",
 ].join('; ');
